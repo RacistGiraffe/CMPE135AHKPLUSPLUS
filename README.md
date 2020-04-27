@@ -6,7 +6,7 @@ Import all files to your C/C++ Project in eclipse. Ensure ANTLR 4.7.2 is install
 
 Afterwards, right click Pcl1.g4 | Run As | External Tools Configurations. Create a new ANTLR run configuration and in the 'Arugments' text, enter: 
 ```
-'-no-listener -visitor -encoding UTF-8 -Dlanguage=Cpp'
+-no-listener -visitor -encoding UTF-8 -Dlanguage=Cpp
 ```
 Finally, create a new run configuration, and set the argument to sample1.pas (we will rename later). 
 
