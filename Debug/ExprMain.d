@@ -155,8 +155,17 @@ ExprMain.o: ../ExprMain.cpp \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathTokenElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardAnywhereElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h \
- /home/zachary/eclipse-workspace/ExprCpp/target/generated-sources/antlr4/Pcl1Lexer.h \
- /home/zachary/eclipse-workspace/ExprCpp/target/generated-sources/antlr4/Pcl1Parser.h
+ ../target/generated-sources/antlr4/Pcl1Lexer.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTabEntry.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTab.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/ICode.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h \
+ ../target/generated-sources/antlr4/Pcl1Parser.h ../Pass1Visitor.h \
+ ../wci/intermediate/SymTabStack.h ../wci/intermediate/SymTab.h \
+ ../wci/intermediate/SymTabEntry.h ../wci/intermediate/TypeSpec.h \
+ ../target/generated-sources/antlr4/Pcl1BaseVisitor.h \
+ ../target/generated-sources/antlr4/Pcl1Visitor.h ../Pass2Visitor.h
 
 /usr/local/include/antlr4-runtime/antlr4-runtime.h:
 
@@ -470,6 +479,32 @@ ExprMain.o: ../ExprMain.cpp \
 
 /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h:
 
-/home/zachary/eclipse-workspace/ExprCpp/target/generated-sources/antlr4/Pcl1Lexer.h:
+../target/generated-sources/antlr4/Pcl1Lexer.h:
 
-/home/zachary/eclipse-workspace/ExprCpp/target/generated-sources/antlr4/Pcl1Parser.h:
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTabEntry.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTab.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/ICode.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h:
+
+../target/generated-sources/antlr4/Pcl1Parser.h:
+
+../Pass1Visitor.h:
+
+../wci/intermediate/SymTabStack.h:
+
+../wci/intermediate/SymTab.h:
+
+../wci/intermediate/SymTabEntry.h:
+
+../wci/intermediate/TypeSpec.h:
+
+../target/generated-sources/antlr4/Pcl1BaseVisitor.h:
+
+../target/generated-sources/antlr4/Pcl1Visitor.h:
+
+../Pass2Visitor.h:

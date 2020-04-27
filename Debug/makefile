@@ -8,6 +8,12 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include wci/util/subdir.mk
+-include wci/intermediate/typeimpl/subdir.mk
+-include wci/intermediate/symtabimpl/subdir.mk
+-include wci/intermediate/icodeimpl/subdir.mk
+-include wci/intermediate/subdir.mk
+-include wci/subdir.mk
 -include target/generated-sources/antlr4/subdir.mk
 -include subdir.mk
 -include objects.mk

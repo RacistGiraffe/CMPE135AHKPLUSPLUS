@@ -25,4 +25,10 @@ C_DEPS :=
 SUBDIRS := \
 . \
 target/generated-sources/antlr4 \
+wci \
+wci/intermediate \
+wci/intermediate/icodeimpl \
+wci/intermediate/symtabimpl \
+wci/intermediate/typeimpl \
+wci/util \
 

@@ -1,5 +1,10 @@
 target/generated-sources/antlr4/Pcl1BaseVisitor.o: \
  ../target/generated-sources/antlr4/Pcl1BaseVisitor.cpp \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTabEntry.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTab.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/ICode.h \
+ /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h \
  ../target/generated-sources/antlr4/Pcl1BaseVisitor.h \
  /usr/local/include/antlr4-runtime/antlr4-runtime.h \
  /usr/local/include/antlr4-runtime/antlr4-common.h \
@@ -159,6 +164,16 @@ target/generated-sources/antlr4/Pcl1BaseVisitor.o: \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h \
  ../target/generated-sources/antlr4/Pcl1Visitor.h \
  ../target/generated-sources/antlr4/Pcl1Parser.h
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTabEntry.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTab.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/ICode.h:
+
+/home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h:
 
 ../target/generated-sources/antlr4/Pcl1BaseVisitor.h:
 
