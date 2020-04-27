@@ -24,7 +24,6 @@ stmt : compoundStmt
      | loop_num_stmt
      | loop_until_stmt
      | if_stmt
-     //| while_stmt
      | printStmt
      |
      ;
@@ -33,9 +32,7 @@ stmtList       : stmt ( ';' stmt )* ;
 assignmentStmt : variable '=' expr ;
 loop_num_stmt       : LOOP ',' expr '}' stmtList '{' ;
 loop_until_stmt     : LOOP '}' stmtList '{' WHILE '(' expr ')' ;
-//if_stmt         : IF expr '}' stmt '{' ( ELSE '}' stmtList '{' ';')? ;
 if_stmt         : IF '(' expr ')' '}' (( stmtList ) '{' ( ELSE  '}' stmtList '{'  )?) ;
-//while_stmt      : WHILE expr '}' stmtList '{' ; 
 printStmt		: PRINT '(' formatString printArg* ')';
 
 formatString   : STRING ;
