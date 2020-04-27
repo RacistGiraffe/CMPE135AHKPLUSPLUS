@@ -2,12 +2,14 @@
 #include <fstream>
 
 #include "antlr4-runtime.h"
-#include "Pcl1Lexer.h"
-#include "Pcl1Parser.h"
+#include "target/generated-sources/antlr4/Pcl1Lexer.h"
+#include "target/generated-sources/antlr4/Pcl1Parser.h"
+#include "Pass1Visitor.h"
+#include "Pass2Visitor.h"
 
+using namespace std;
 using namespace antlrcpp;
 using namespace antlr4;
-using namespace std;
 
 int main(int argc, const char *args[])
 {
@@ -17,19 +19,15 @@ int main(int argc, const char *args[])
     ANTLRInputStream input(ins);
     Pcl1Lexer lexer(&input);
     CommonTokenStream tokens(&lexer);
-    tokens.fill();
-
-    cout << "Tokens:" << endl;
-    for (Token *token : tokens.getTokens())
-    {
-        std::cout << token->toString() << std::endl;
-    }
 
     Pcl1Parser parser(&tokens);
     tree::ParseTree *tree = parser.program();
 
-    cout << endl << "Parse tree (Lisp format):" << endl;
-    std::cout << tree->toStringTree(&parser) << endl;
+    Pass1Visitor *pass1 = new Pass1Visitor();
+    pass1->visit(tree);
+
+    Pass2Visitor *pass2 = new Pass2Visitor();
+    pass2->visit(tree);
 
     return 0;
 }

@@ -1,4 +1,8 @@
 
+	#include "wci/intermediate/TypeSpec.h"
+	using namespace wci::intermediate;
+
+
 // Generated from Pcl1.g4 by ANTLR 4.7.2
 
 #pragma once
@@ -23,6 +27,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitMainBlock(Pcl1Parser::MainBlockContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitBlock(Pcl1Parser::BlockContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -31,7 +39,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDecl_list(Pcl1Parser::Decl_listContext *ctx) override {
+  virtual antlrcpp::Any visitDeclList(Pcl1Parser::DeclListContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -39,19 +47,19 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitVar_list(Pcl1Parser::Var_listContext *ctx) override {
+  virtual antlrcpp::Any visitVarList(Pcl1Parser::VarListContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitVar_id(Pcl1Parser::Var_idContext *ctx) override {
+  virtual antlrcpp::Any visitVarId(Pcl1Parser::VarIdContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitType_id(Pcl1Parser::Type_idContext *ctx) override {
+  virtual antlrcpp::Any visitTypeId(Pcl1Parser::TypeIdContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBody(Pcl1Parser::BodyContext *ctx) override {
+  virtual antlrcpp::Any visitCompoundStmt(Pcl1Parser::CompoundStmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -59,11 +67,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitStmt_list(Pcl1Parser::Stmt_listContext *ctx) override {
+  virtual antlrcpp::Any visitStmtList(Pcl1Parser::StmtListContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAssignment_stmt(Pcl1Parser::Assignment_stmtContext *ctx) override {
+  virtual antlrcpp::Any visitAssignmentStmt(Pcl1Parser::AssignmentStmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -79,11 +87,15 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitWhile_stmt(Pcl1Parser::While_stmtContext *ctx) override {
+  virtual antlrcpp::Any visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPrint_stmt(Pcl1Parser::Print_stmtContext *ctx) override {
+  virtual antlrcpp::Any visitFormatString(Pcl1Parser::FormatStringContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitPrintArg(Pcl1Parser::PrintArgContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -91,11 +103,51 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpr(Pcl1Parser::ExprContext *ctx) override {
+  virtual antlrcpp::Any visitVariableExpr(Pcl1Parser::VariableExprContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNumber(Pcl1Parser::NumberContext *ctx) override {
+  virtual antlrcpp::Any visitAddSubExpr(Pcl1Parser::AddSubExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitBracketExpr(Pcl1Parser::BracketExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitUnsignedNumberExpr(Pcl1Parser::UnsignedNumberExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitParenExpr(Pcl1Parser::ParenExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitSignedNumberExpr(Pcl1Parser::SignedNumberExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitMulDivOp(Pcl1Parser::MulDivOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAddSubOp(Pcl1Parser::AddSubOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitRelOp(Pcl1Parser::RelOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitSignedNumber(Pcl1Parser::SignedNumberContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -103,15 +155,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitMul_div_op(Pcl1Parser::Mul_div_opContext *ctx) override {
+  virtual antlrcpp::Any visitIntegerConst(Pcl1Parser::IntegerConstContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAdd_sub_op(Pcl1Parser::Add_sub_opContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitRel_op(Pcl1Parser::Rel_opContext *ctx) override {
+  virtual antlrcpp::Any visitFloatConst(Pcl1Parser::FloatConstContext *ctx) override {
     return visitChildren(ctx);
   }
 

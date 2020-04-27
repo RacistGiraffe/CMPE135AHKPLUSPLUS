@@ -1,53 +1,72 @@
 grammar Pcl1;
 
-program : header block '{' ';' ;
-header  : MAIN IDENTIFIER '}' ;
-block   : declarations body ;
+@header {
+	#include "wci/intermediate/TypeSpec.h"
+	using namespace wci::intermediate;
+}
 
-declarations : decl_list ';' ;
-decl_list    : decl ( ';' decl )* ;
-decl         : type_id '}' var_list '{' ;
-var_list     : var_id ( ',' var_id )* ;
-var_id       : IDENTIFIER ;
-type_id      : IDENTIFIER ;
+program : header mainBlock '.' ;
+header  : MAIN IDENTIFIER ';' ;
+mainBlock : block;
+block   : declarations compoundStmt ;
 
-body         : BO stmt_list DY ;
+declarations : declList ';' ;
+declList    : decl ( ';' decl )* ;
+decl         : varList 'as' typeId ;
+varList     : varId ( ',' varId )* ;
+varId locals [ TypeSpec *type = nullptr ] : IDENTIFIER ; 
+typeId      : IDENTIFIER ;
 
-stmt : body
-     | assignment_stmt
+compoundStmt         : BO stmtList DY ;
+
+stmt : compoundStmt
+     | assignmentStmt
      | loop_num_stmt
      | loop_until_stmt
      | if_stmt
-     | while_stmt
-     | print_stmt
+     //| while_stmt
+     | printStmt
      |
      ;
 
-stmt_list       : stmt ( ';' stmt )* ;
-assignment_stmt : variable '=' expr ;
-loop_num_stmt       : LOOP ',' expr '}' stmt_list '{' ;
-loop_until_stmt     : LOOP '}' stmt_list '{' UNTIL '(' expr ')' ;
-if_stmt         : IF expr '}' stmt '{' ( ELSE '}' stmt_list '{' )? ;
-while_stmt      : WHILE expr '}' stmt_list '{' ; 
-print_stmt		: PRINT variable ;
+stmtList       : stmt ( ';' stmt )* ;
+assignmentStmt : variable '=' expr ;
+loop_num_stmt       : LOOP ',' expr '}' stmtList '{' ;
+loop_until_stmt     : LOOP '}' stmtList '{' WHILE '(' expr ')' ;
+//if_stmt         : IF expr '}' stmt '{' ( ELSE '}' stmtList '{' ';')? ;
+if_stmt         : IF '(' expr ')' '}' (( stmtList ) '{' ( ELSE  '}' stmtList '{'  )?) ;
+//while_stmt      : WHILE expr '}' stmtList '{' ; 
+printStmt		: PRINT '(' formatString printArg* ')';
+
+formatString   : STRING ;
+printArg       : ',' expr ;
 
 variable : IDENTIFIER ;
 
-expr : expr mul_div_op expr 
-     | expr add_sub_op expr
-     | expr rel_op expr
-     | number
-     | IDENTIFIER
-     | '(' expr ')'
-     | '}' expr '{'
+expr locals [ TypeSpec *type = nullptr ]
+	 : expr mulDivOp expr  #mulDivExpr
+     | expr addSubOp expr  #addSubExpr
+     | expr relOp expr 	#relOpExpr
+     | number				#unsignedNumberExpr
+     | signedNumber		#signedNumberExpr
+     | variable		#variableExpr
+     | '(' expr ')'		#parenExpr
+     | '}' expr '{'		#bracketExpr
      ;
      
-number : sign? INTEGER ;
-sign   : '+' | '-' ;
+mulDivOp : MUL_OP | DIV_OP ;
+addSubOp : ADD_OP | SUB_OP ;
+relOp     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
 
-mul_div_op : MUL_OP | DIV_OP ;
-add_sub_op : ADD_OP | SUB_OP ;
-rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
+signedNumber locals [ TypeSpec *type = nullptr ] 
+    : sign number 
+    ;
+sign   : ADD_OP | SUB_OP ;
+
+number locals [ TypeSpec *type = nullptr ]
+    : INTEGER    # integerConst
+    | FLOAT      # floatConst
+    ;
 
 fragment A : [Aa];
 fragment B : [Bb];
@@ -102,6 +121,13 @@ GE_OP : '>=' ;
 
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
 INTEGER    : [0-9]+ ;
+FLOAT      : [0-9]+ '.' [0-9]+ ;
 NEWLINE    : '\r'? '\n' -> skip  ;
 WS         : [ \t]+ -> skip ; 
 
+QUOTE  : '\'' ;
+STRING : QUOTE STRING_CHAR* QUOTE ;
+
+fragment STRING_CHAR : QUOTE QUOTE  // two consecutive quotes
+                     | ~('\'')      // any non-quote character
+                     ;
