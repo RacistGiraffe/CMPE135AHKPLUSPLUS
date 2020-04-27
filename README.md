@@ -27,6 +27,6 @@ This will generate a class file (sample1.j) where you can then run it using Jasm
 
 #### Current problems:
 ```
--Cannot divide/multiply reals by integers and vice versa. This is why I use 9.0 on some parts. 
+-Cannot divide/multiply reals by integers and vice versa. This is why I use 9.0, 3.0, and 2.0 on some parts. 
 -Hanging brackets MUST end with a semicolon
 ```
