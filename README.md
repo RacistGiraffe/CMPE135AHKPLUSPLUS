@@ -1,5 +1,5 @@
 # AHK++
-Compiler created for CMPE 152 at SJSU. This compiler is for a really random language based off of C++, Pascal, and AutoHotKey (hence the name AHK++). However, we currently lost what we used from AHK, so it's kinda just pascal++ now. However, we're keeping the name cause it sounds cool. 
+Compiler created for CMPE 152 at SJSU. This compiler is for a really random language based off of C++, Pascal, and AutoHotKey (hence the name AHK++). However, we currently lost what we used from AHK, so it's kinda just pascal++ now. We're keeping the name cause it sounds cool. 
 
 ## To run
 Import all files to your C/C++ Project in eclipse. Ensure ANTLR 4.7.2 is installed and is setup properly to be used with eclipse. Once that is done, change your include settings (Project | Properties | C/C++ Build | Settings | GCC C++ Compiler | Includes) to include ANTLR4, the files in the main folder of the project, the wci folder, and /target/generated-sources/antlr4. Finally, go to GCC C++ Linker (in the same window) and select libraries. Add a new library and enter 'antlr4-runtime'. 
@@ -17,7 +17,7 @@ Finally, download Jasmin and the Pascal Run Time Library are in easy-to-find loc
 ```
 java -jar /your/path/to/jasmin.jar sample1.j
 java -cp .:/your/path/to/PascalRTL.jar sample1
-NOTE: For the second command, ENSURE there is no tilde (~) in the path. If there is, you WILL get errors). 
+NOTE: For the second command, ENSURE there is no tilde (~) in the path. If there is, you WILL get errors. 
 ```
 This will generate a class file (sample1.j) where you can then run it using Jasmin. 
 ### Current progress:
