@@ -228,11 +228,14 @@ antlrcpp::Any Pass1Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 	TypeSpec *type1 = ctx->expr(0)->type;
 	TypeSpec *type2 = ctx->expr(1)->type;
 
-	bool integer_mode = (type1 == Predefined::integer_type)
-						&& (type2 == Predefined::integer_type);
+	 bool integer_mode =    (type1 == Predefined::integer_type)
+	                        && (type2 == Predefined::integer_type);
+	bool real_mode    =    (type1 == Predefined::real_type)
+						&& (type2 == Predefined::real_type);
 
-	TypeSpec *type = integer_mode ? Predefined::integer_type :
-									nullptr;
+	TypeSpec *type = integer_mode ? Predefined::integer_type
+				   : real_mode    ? Predefined::real_type
+				   :                nullptr;
 
 	ctx->type = type;
 	return value;

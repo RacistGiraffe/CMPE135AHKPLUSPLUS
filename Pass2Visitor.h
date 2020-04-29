@@ -46,6 +46,8 @@ public:
     antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *ctx) override;
     antlrcpp::Any visitIf_stmt(Pcl1Parser::If_stmtContext *context) override;
     antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx) override;
+    antlrcpp::Any visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx) override;
+
 };
 
 #endif /* PASS2VISITOR_H_ */

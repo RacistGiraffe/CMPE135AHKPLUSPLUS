@@ -5,17 +5,17 @@ grammar Pcl1;
 	using namespace wci::intermediate;
 }
 
-program : header mainBlock '.' ;
-header  : MAIN IDENTIFIER ';' ;
-mainBlock : block;
-block   : declarations compoundStmt ;
+program 	: header mainBlock '.' ;
+header  	: MAIN IDENTIFIER ';' ;
+mainBlock 	: block;
+block   	: declarations compoundStmt ;
 
-declarations : declList ';' ;
-declList    : decl ( ';' decl )* ;
-decl         : varList 'as' typeId ;
-varList     : varId ( ',' varId )* ;
+declarations 	: declList ';' ;
+declList    	: decl ( ';' decl )* ;
+decl         	: varList 'as' typeId ;
+varList     	: varId ( ',' varId )* ;
 varId locals [ TypeSpec *type = nullptr ] : IDENTIFIER ; 
-typeId      : IDENTIFIER ;
+typeId      	: IDENTIFIER ;
 
 compoundStmt         : BO stmtList DY ;
 
@@ -41,14 +41,14 @@ printArg       : ',' expr ;
 variable : IDENTIFIER ;
 
 expr locals [ TypeSpec *type = nullptr ]
-	 : expr mulDivOp expr  #mulDivExpr
-     | expr addSubOp expr  #addSubExpr
-     | expr relOp expr 	#relOpExpr
+	 : expr mulDivOp expr  	#mulDivExpr
+     | expr addSubOp expr  	#addSubExpr
+     | expr relOp expr 		#relOpExpr
      | number				#unsignedNumberExpr
-     | signedNumber		#signedNumberExpr
-     | variable		#variableExpr
-     | '(' expr ')'		#parenExpr
-     | '}' expr '{'		#bracketExpr
+     | signedNumber			#signedNumberExpr
+     | variable				#variableExpr
+     | '(' expr ')'			#parenExpr
+     | '}' expr '{'			#bracketExpr
      ;
      
 mulDivOp : MUL_OP | DIV_OP ;

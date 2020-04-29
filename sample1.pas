@@ -5,6 +5,7 @@ MAIN sample1;
     
 BO
     j = 32;
+    beta5x = 12.0;
     
     LOOP
     }
@@ -17,14 +18,18 @@ BO
     	i = j;
     {;
     
-    IF (j > i)
+    print('i = %d\n', i);
+    print('Test\n');
+    
+    IF (j < i)
     }
     	i = 3*j;
     {
     ELSE 
     }
         alpha = 9.0;
-        beta5x = alpha/3.0;
-        beta5x = beta5x - alpha*2.0;
+        beta5x = alpha/3.0 - alpha*2.0;
 	{;
+	print('i = %d\n', i);
+	print('beta5x = %f\n', beta5x);
 DY.

@@ -40,6 +40,11 @@
 	ldc	32
 	putstatic	sample1/j I
 
+; beta5x=12.0
+
+	ldc	12.0
+	putstatic	sample1/beta5x F
+
 ; LOOP}i=2+3*j;{WHILE(i<j+2)
 
 Label_0:
@@ -67,6 +72,7 @@ Label_1:
 	getstatic	sample1/i I
 	getstatic	sample1/j I
 	if_icmple Label_2
+	goto Label_3
 Label_2:
 
 ; i=j
@@ -76,29 +82,50 @@ Label_2:
 
 ; 
 
+Label_3:
 
-; IF(j>i)}i=3*j;{ELSE}alpha=9.0;beta5x=alpha/3.0;beta5x=beta5x-alpha*2.0;{
+; print('i = %d\n',i)
+
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc	"i = %d\n"
+	ldc	1
+	anewarray	java/lang/Object
+	dup
+	ldc	0
+	getstatic	sample1/i I
+	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+	aastore
+	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+	pop
+
+; print('Test\n')
+
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc	"Test\n"
+	ldc	0
+	anewarray	java/lang/Object
+	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+	pop
+
+; IF(j<i)}i=3*j;{ELSE}alpha=9.0;beta5x=alpha/3.0-alpha*2.0;{
 
 Label_4:
 	getstatic	sample1/j I
 	getstatic	sample1/i I
-	if_icmpgt Label_5
+	if_icmplt Label_5
+	goto Label_6
+Label_5:
 
 ; alpha=9.0
 
 	ldc	9.0
 	putstatic	sample1/alpha F
 
-; beta5x=alpha/3.0
+; beta5x=alpha/3.0-alpha*2.0
 
 	getstatic	sample1/alpha F
 	ldc	3.0
 	fdiv
-	putstatic	sample1/beta5x F
-
-; beta5x=beta5x-alpha*2.0
-
-	getstatic	sample1/beta5x F
 	getstatic	sample1/alpha F
 	ldc	2.0
 	fmul
@@ -108,18 +135,35 @@ Label_4:
 ; 
 
 	goto Label_6
-Label_5:
-
-; i=3*j
-
-	ldc	3
-	getstatic	sample1/j I
-	imul
-	putstatic	sample1/i I
-
-; 
-
 Label_6:
+
+; print('i = %d\n',i)
+
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc	"i = %d\n"
+	ldc	1
+	anewarray	java/lang/Object
+	dup
+	ldc	0
+	getstatic	sample1/i I
+	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+	aastore
+	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+	pop
+
+; print('beta5x = %f\n',beta5x)
+
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc	"beta5x = %f\n"
+	ldc	1
+	anewarray	java/lang/Object
+	dup
+	ldc	0
+	getstatic	sample1/beta5x F
+	invokestatic	java/lang/Float.valueOf(F)Ljava/lang/Float;
+	aastore
+	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+	pop
 
 ; 
 

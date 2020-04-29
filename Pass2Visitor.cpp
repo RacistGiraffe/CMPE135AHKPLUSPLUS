@@ -7,8 +7,8 @@
 #include "wci/intermediate/TypeSpec.h"
 #include "wci/intermediate/symtabimpl/Predefined.h"
 
-int labelNum = 0;
-int label = 0;
+int label_number = 0;
+int label_count = 0;
 using namespace wci;
 using namespace wci::intermediate;
 using namespace wci::intermediate::symtabimpl;
@@ -309,17 +309,17 @@ antlrcpp::Any Pass2Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
 /*antlrcpp::Any Pass2Visitor::visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitLoop_num_stmt" << endl;
-
+	//Temporarily removed until we figure out how to do it
 
 }*/
 antlrcpp::Any Pass2Visitor::visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitLoop_until_stmt" << endl;
 
-	int loop_start = labelNum++;
-	j_file << "Label_" << loop_start << ":" << endl;
+	int start = label_number++;
+	j_file << "Label_" << start << ":" << endl;
 	visit(ctx->stmtList());
-	label=loop_start;
+	label_count = start;
 	visit(ctx->expr());
 	return NULL;
 
@@ -329,34 +329,33 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(Pcl1Parser::If_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitIf_stmt" << endl;
 
-	int original_label = labelNum++;
-	int true_label = labelNum++;
-	int last_label = labelNum++;
+	int first_label = label_number++;
+	int true_label = label_number++;
+	int end_label = label_number++;
 	int statement_size = ctx->stmtList().size();
 	bool has_else = false;
 
 	if (statement_size > 1)
-		has_else=true;
+		has_else = true;
 
-	j_file << "Label_" << original_label << ":" << endl;
-	label = true_label;
+	j_file << "Label_" << first_label << ":" << endl;
+	label_count = true_label;
 	visit(ctx->expr());
+	j_file << "\tgoto " << "Label_" << end_label << endl;
 
 	if(has_else)
 	{
+		j_file << "Label_" << end_label - 1<< ":" << endl;
 		visitChildren(ctx->stmtList(statement_size - 1));
-		j_file << "\tgoto " << "Label_" << last_label << endl;
+		j_file << "\tgoto " << "Label_" << end_label << endl;
 	}
 	else
 	{
 		j_file << "Label_" << true_label << ":" << endl;
 		visitChildren(ctx->stmtList(statement_size - 1));
-		return NULL;
 	}
 
-	j_file << "Label_" << true_label << ":" << endl;
-	visitChildren(ctx->stmtList(statement_size - 2));
-	j_file << "Label_" << last_label << ":" << endl;
+	j_file << "Label_" << end_label << ":" << endl;
 	return NULL;
 }
 
@@ -371,24 +370,80 @@ antlrcpp::Any Pass2Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 	string op = ctx->relOp()->getText();
 	string jas_op;
 
-	//Character are loaded as integers
 	bool integer_mode =    ((type1 == Predefined::integer_type)
 						&& (type2 == Predefined::integer_type)) ||
 						   ((type1 == Predefined::real_type)
 						&& (type2 == Predefined::real_type));
 	if (op == ">")
 	   jas_op = integer_mode ? "if_icmpgt":"????";
-	else if (op == ">=")
-	   jas_op = integer_mode ? "if_icmpge":"????";
 	else if (op == "<")
 		jas_op = integer_mode ? "if_icmplt":"????";
+	else if (op == ">=")
+	   jas_op = integer_mode ? "if_icmpge":"????";
 	else if (op == "<=")
 		jas_op = integer_mode ? "if_icmple":"????";
+	else if (op == "==")
+		jas_op = integer_mode ? "if_icmpeq" : "????";
 	else if (op == "!=")
 		jas_op = integer_mode ? "if_icmpne":"????";
-	else
-		jas_op = integer_mode ? "if_icmpeq" : "????";
 
-	j_file << "\t" << jas_op << " Label_" << label << endl;
+	j_file << "\t" << jas_op << " Label_" << label_count << endl;
 	return NULL;
+}
+
+antlrcpp::Any Pass2Visitor::visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx)
+{
+    // Get the format string without the surrounding the single quotes.
+    string str = ctx->formatString()->getText();
+    string format_string = str.substr(1, str.length() - 2);
+
+    // Emit code to push the java.lang.System.out object.
+    j_file << "\tgetstatic\tjava/lang/System/out Ljava/io/PrintStream;" << endl;
+
+    // Emit code to push the format string.
+    j_file << "\tldc\t\"" << format_string << "\"" << endl;
+
+    // Array size is the number of expressions to evaluate and print.
+    int array_size = ctx->printArg().size();
+
+    // Emit code to create the array of the correct size.
+    j_file << "\tldc\t" << array_size << endl;
+    j_file << "\tanewarray\tjava/lang/Object" << endl;
+
+    // Loop to generate code for each expression.
+    for (int i = 0; i < array_size; i++)
+    {
+        j_file << "\tdup" << endl;         // duplicate the array address
+        j_file << "\tldc\t" << i << endl;  // array element index
+
+        // Emit code to evaluate the expression.
+        visit(ctx->printArg(i)->expr());
+        TypeSpec *type = ctx->printArg(i)->expr()->type;
+
+        // Emit code to convert a scalar integer or float value
+        // to an Integer or Float object, respectively.
+        if (type == Predefined::integer_type)
+        {
+            j_file << "\tinvokestatic\tjava/lang/Integer.valueOf(I)"
+                   << "Ljava/lang/Integer;"
+                   << endl;
+        }
+        else
+        {
+            j_file << "\tinvokestatic\tjava/lang/Float.valueOf(F)"
+                   << "Ljava/lang/Float;"
+                   << endl;
+        }
+
+        j_file << "\taastore" << endl;  // store the value into the array
+    }
+
+    // Emit code to call java.io.PrintStream.printf.
+    j_file << "\tinvokevirtual java/io/PrintStream.printf"
+           << "(Ljava/lang/String;[Ljava/lang/Object;)"
+           << "Ljava/io/PrintStream;"
+           << endl;
+    j_file << "\tpop" << endl;
+
+    return nullptr;
 }
