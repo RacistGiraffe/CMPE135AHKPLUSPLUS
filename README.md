@@ -17,12 +17,12 @@ Finally, download Jasmin and the Pascal Run Time Library are in easy-to-find loc
 ```
 java -jar /your/path/to/jasmin.jar sample1.j
 java -cp .:/your/path/to/PascalRTL.jar sample1
+NOTE: For the second command, ENSURE there is no tilde (~) in the path. If there is, you WILL get errors). 
 ```
 This will generate a class file (sample1.j) where you can then run it using Jasmin. 
 ### Current progress:
 ```
--Assignment 7 - compile Jasmin code and run the code
--As of 4/27 03:00, all parts of the .g4 file work except for print
+-Assignment 7 completed. Can compile and run. Produces good output. 
 ```
 
 #### Current problems:
