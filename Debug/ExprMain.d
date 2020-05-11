@@ -155,17 +155,17 @@ ExprMain.o: ../ExprMain.cpp \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathTokenElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardAnywhereElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h \
- ../target/generated-sources/antlr4/Pcl1Lexer.h \
+ ../target/generated-sources/antlr4/MemertonsLexer.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTabEntry.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/SymTab.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/ICode.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h \
- ../target/generated-sources/antlr4/Pcl1Parser.h ../Pass1Visitor.h \
+ ../target/generated-sources/antlr4/MemertonsParser.h ../Pass1Visitor.h \
  ../wci/intermediate/SymTabStack.h ../wci/intermediate/SymTab.h \
  ../wci/intermediate/SymTabEntry.h ../wci/intermediate/TypeSpec.h \
- ../target/generated-sources/antlr4/Pcl1BaseVisitor.h \
- ../target/generated-sources/antlr4/Pcl1Visitor.h ../Pass2Visitor.h
+ ../target/generated-sources/antlr4/MemertonsBaseVisitor.h \
+ ../target/generated-sources/antlr4/MemertonsVisitor.h ../Pass2Visitor.h
 
 /usr/local/include/antlr4-runtime/antlr4-runtime.h:
 
@@ -479,7 +479,7 @@ ExprMain.o: ../ExprMain.cpp \
 
 /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h:
 
-../target/generated-sources/antlr4/Pcl1Lexer.h:
+../target/generated-sources/antlr4/MemertonsLexer.h:
 
 /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h:
 
@@ -491,7 +491,7 @@ ExprMain.o: ../ExprMain.cpp \
 
 /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/../Object.h:
 
-../target/generated-sources/antlr4/Pcl1Parser.h:
+../target/generated-sources/antlr4/MemertonsParser.h:
 
 ../Pass1Visitor.h:
 
@@ -503,8 +503,8 @@ ExprMain.o: ../ExprMain.cpp \
 
 ../wci/intermediate/TypeSpec.h:
 
-../target/generated-sources/antlr4/Pcl1BaseVisitor.h:
+../target/generated-sources/antlr4/MemertonsBaseVisitor.h:
 
-../target/generated-sources/antlr4/Pcl1Visitor.h:
+../target/generated-sources/antlr4/MemertonsVisitor.h:
 
 ../Pass2Visitor.h:

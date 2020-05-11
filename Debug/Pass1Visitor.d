@@ -3,7 +3,7 @@ Pass1Visitor.o: ../Pass1Visitor.cpp ../Pass1Visitor.h \
  ../wci/intermediate/SymTabEntry.h ../wci/intermediate/ICode.h \
  ../wci/intermediate/../Object.h ../wci/intermediate/TypeSpec.h \
  ../wci/intermediate/SymTabEntry.h \
- ../target/generated-sources/antlr4/Pcl1BaseVisitor.h \
+ ../target/generated-sources/antlr4/MemertonsBaseVisitor.h \
  /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h \
  /usr/local/include/antlr4-runtime/antlr4-runtime.h \
  /usr/local/include/antlr4-runtime/antlr4-common.h \
@@ -161,8 +161,8 @@ Pass1Visitor.o: ../Pass1Visitor.cpp ../Pass1Visitor.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathTokenElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardAnywhereElement.h \
  /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h \
- ../target/generated-sources/antlr4/Pcl1Visitor.h \
- ../target/generated-sources/antlr4/Pcl1Parser.h \
+ ../target/generated-sources/antlr4/MemertonsVisitor.h \
+ ../target/generated-sources/antlr4/MemertonsParser.h \
  ../wci/intermediate/SymTabFactory.h \
  ../wci/intermediate/symtabimpl/SymTabImpl.h \
  ../wci/intermediate/symtabimpl/../SymTab.h \
@@ -195,7 +195,7 @@ Pass1Visitor.o: ../Pass1Visitor.cpp ../Pass1Visitor.h \
 
 ../wci/intermediate/SymTabEntry.h:
 
-../target/generated-sources/antlr4/Pcl1BaseVisitor.h:
+../target/generated-sources/antlr4/MemertonsBaseVisitor.h:
 
 /home/zachary/eclipse-workspace/ExprCpp/wci/intermediate/TypeSpec.h:
 
@@ -511,9 +511,9 @@ Pass1Visitor.o: ../Pass1Visitor.cpp ../Pass1Visitor.h \
 
 /usr/local/include/antlr4-runtime/tree/xpath/XPathWildcardElement.h:
 
-../target/generated-sources/antlr4/Pcl1Visitor.h:
+../target/generated-sources/antlr4/MemertonsVisitor.h:
 
-../target/generated-sources/antlr4/Pcl1Parser.h:
+../target/generated-sources/antlr4/MemertonsParser.h:
 
 ../wci/intermediate/SymTabFactory.h:
 
