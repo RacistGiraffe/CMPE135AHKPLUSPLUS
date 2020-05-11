@@ -26,5 +26,7 @@ NOTE: For the second command, ENSURE there is no tilde (~) in the path. If there
 This will generate a class file (sample1.j) where you can then run it using Jasmin. 
 ### Current progress:
 ```
--Project done. Procedures/functions do not work (taking an L on that). Error recovery does not exist (also taking an L).
+-Project done. 
+-Procedures/functions do not work (taking an L on that). 
+-Error recovery does not exist (also taking an L).
 ```
