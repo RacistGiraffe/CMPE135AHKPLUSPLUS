@@ -42,11 +42,13 @@ public:
     antlrcpp::Any visitSignedNumber(Pcl1Parser::SignedNumberContext *ctx) override;
     antlrcpp::Any visitIntegerConst(Pcl1Parser::IntegerConstContext *ctx) override;
     antlrcpp::Any visitFloatConst(Pcl1Parser::FloatConstContext *ctx) override;
-    //antlrcpp::Any visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *ctx) override;
-    antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *ctx) override;
+    antlrcpp::Any visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtContext *ctx) override;
     antlrcpp::Any visitIf_stmt(Pcl1Parser::If_stmtContext *context) override;
     antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx) override;
     antlrcpp::Any visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx) override;
+    //antlrcpp::Any visitFunction_defn(Pcl1Parser::Function_defnContext *ctx) override;
+    //antlrcpp::Any visitFunction_call(Pcl1Parser::Function_callContext *ctx) override;
+    //antlrcpp::Any visitReturn_stmt(Pcl1Parser::Return_stmtContext *ctx) override;
 
 };
 

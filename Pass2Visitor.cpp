@@ -14,6 +14,8 @@ using namespace wci::intermediate;
 using namespace wci::intermediate::symtabimpl;
 
 const bool DEBUG_2 = false;
+static string fxn_name = "";
+static unordered_map<string, vector<vector<string>>> fxn_variables_vec;
 
 Pass2Visitor::Pass2Visitor()
     : program_name(""), j_file(nullptr)
@@ -237,7 +239,7 @@ antlrcpp::Any Pass2Visitor::visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx)
     }
     else
     {
-        opcode = integer_mode ? "idpv"
+        opcode = integer_mode ? "idiv"
                : real_mode    ? "fdiv"
                :                "????";
     }
@@ -306,13 +308,7 @@ antlrcpp::Any Pass2Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
     return visitChildren(ctx);
 }
 
-/*antlrcpp::Any Pass2Visitor::visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *ctx)
-{
-	if (DEBUG_2) cout << "=== Pass 2: visitLoop_num_stmt" << endl;
-	//Temporarily removed until we figure out how to do it
-
-}*/
-antlrcpp::Any Pass2Visitor::visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitLoop_until_stmt" << endl;
 
@@ -346,8 +342,11 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(Pcl1Parser::If_stmtContext *ctx)
 	if(has_else)
 	{
 		j_file << "Label_" << end_label - 1<< ":" << endl;
+		visitChildren(ctx->stmtList(statement_size - 2));
+		j_file << "\tgoto " << "Label_" << end_label + 1 << endl;
+		j_file << "Label_" << end_label << ":" << endl;
 		visitChildren(ctx->stmtList(statement_size - 1));
-		j_file << "\tgoto " << "Label_" << end_label << endl;
+		end_label++;
 	}
 	else
 	{
@@ -355,7 +354,7 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(Pcl1Parser::If_stmtContext *ctx)
 		visitChildren(ctx->stmtList(statement_size - 1));
 	}
 
-	j_file << "Label_" << end_label << ":" << endl;
+	j_file << "Label_" << end_label++ << ":" << endl;
 	return NULL;
 }
 
@@ -447,3 +446,77 @@ antlrcpp::Any Pass2Visitor::visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx)
 
     return nullptr;
 }
+
+/*antlrcpp::Any Pass2Visitor::visitFunction_defn(Pcl1Parser::Function_defnContext *ctx)
+{
+	 if(DEBUG_2) cout << "=== Pass 2: visitFunction_defn: " << endl;
+	 fxn_name = ctx->funcID()->getText() + "_";
+	 vector<vector<string>> fxn_inputs;
+
+	 j_file << "\tgoto " << fxn_name << "end" << endl;
+	 j_file << ctx->funcID()->getText() << ":" << endl;
+	 j_file << "\tastore_1" << endl;
+
+	 if(ctx->declaration(0) != NULL)
+	 {
+		 for(unsigned int i = 0; i < ctx->declaration().size(); i++)
+		 {
+			 string type_name     = ctx->declaration(i)->children[0]->getText();
+			 string var_name = ctx->declaration(i)->children[1]->getText();
+			 fxn_inputs.push_back({fxn_name + var_name, type_name});
+		 }
+	 }
+	 fxn_variables_vec.emplace(ctx->funcID()->IDENTIFIER()->getText(), fxn_inputs);
+
+	 auto value = visitChildren(ctx->stmtList());
+	 j_file << "\tret 1" << endl;
+	 j_file << fxn_name << "end:" << endl;
+	 fxn_name = "";
+	 return value;
+}
+
+antlrcpp::Any Pass2Visitor::visitFunction_call(Pcl1Parser::Function_callContext *ctx)
+{
+	if(DEBUG_2) cout << "=== Pass 2: visitFunction_call" << endl;
+	if(ctx->identifiers() != NULL)
+	{
+		int input_count = ctx->identifiers()->expr().size();
+		vector<vector<string>> fxn_inputs = fxn_variables_vec.find(ctx->funcID()->getText())->second;
+		int input_num = fxn_inputs.size();
+
+		int total = 0;
+		if (input_num > input_count)
+		{
+			total = input_count;
+		}
+		else
+		{
+			total = input_num;
+		}
+		for(int i = 0; i < total; i++)
+		{
+			string var_name  = fxn_inputs[i][0];
+			string type_name = fxn_inputs[i][1];
+
+			visit(ctx->identifiers()->expr(i));
+
+			string type_indicator =
+				  (type_name == "int")     ? "I"
+				: (type_name == "float")  ? "F"
+				:                            "?";
+			// Emit a field put instruction.
+			j_file << "\tputstatic\t" << program_name << "/" << fxn_name <<  var_name << " " << type_indicator << endl;
+		}
+	}
+	j_file << "\tjsr " << ctx->funcID()->getText() << endl;
+	return NULL;
+}
+
+antlrcpp::Any Pass2Visitor::visitReturn_stmt(Pcl1Parser::Return_stmtContext *ctx)
+{
+	if(DEBUG_2) cout << "=== Pass 2: visitReturn_stmt" << endl;
+	visit(ctx->expr());
+	return NULL;
+}*/
+
+

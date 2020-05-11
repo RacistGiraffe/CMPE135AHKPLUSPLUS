@@ -37,11 +37,10 @@ public:
     antlrcpp::Any visitIntegerConst(Pcl1Parser::IntegerConstContext *ctx) override;
     antlrcpp::Any visitFloatConst(Pcl1Parser::FloatConstContext *ctx) override;
     antlrcpp::Any visitParenExpr(Pcl1Parser::ParenExprContext *ctx) override;
-    antlrcpp::Any visitBracketExpr(Pcl1Parser::BracketExprContext *ctx) override;
     antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx) override;
-    //antlrcpp::Any visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *context) override;
-    //antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *context) override;
-    //antlrcpp::Any visitIf_stmt(Pcl1Parser::If_stmtContext *context) override;
+    //antlrcpp::Any visitFuncCallExpr(Pcl1Parser::FuncCallExprContext *ctx) override;
+    //antlrcpp::Any visitFuncID(Pcl1Parser::FuncIDContext *ctx) override;
+    //antlrcpp::Any visitFunction_defn(Pcl1Parser::Function_defnContext *ctx) override;
 
 };
 

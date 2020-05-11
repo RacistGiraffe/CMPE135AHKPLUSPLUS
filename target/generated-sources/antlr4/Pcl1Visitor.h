@@ -51,9 +51,7 @@ public:
 
     virtual antlrcpp::Any visitAssignmentStmt(Pcl1Parser::AssignmentStmtContext *context) = 0;
 
-    virtual antlrcpp::Any visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *context) = 0;
+    virtual antlrcpp::Any visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitIf_stmt(Pcl1Parser::If_stmtContext *context) = 0;
 
@@ -70,8 +68,6 @@ public:
     virtual antlrcpp::Any visitAddSubExpr(Pcl1Parser::AddSubExprContext *context) = 0;
 
     virtual antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *context) = 0;
-
-    virtual antlrcpp::Any visitBracketExpr(Pcl1Parser::BracketExprContext *context) = 0;
 
     virtual antlrcpp::Any visitUnsignedNumberExpr(Pcl1Parser::UnsignedNumberExprContext *context) = 0;
 
@@ -94,6 +90,8 @@ public:
     virtual antlrcpp::Any visitIntegerConst(Pcl1Parser::IntegerConstContext *context) = 0;
 
     virtual antlrcpp::Any visitFloatConst(Pcl1Parser::FloatConstContext *context) = 0;
+
+    virtual antlrcpp::Any visitTypeID(Pcl1Parser::TypeIDContext *context) = 0;
 
 
 };

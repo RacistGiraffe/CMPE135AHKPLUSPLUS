@@ -75,11 +75,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *ctx) override {
+  virtual antlrcpp::Any visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -112,10 +108,6 @@ public:
   }
 
   virtual antlrcpp::Any visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitBracketExpr(Pcl1Parser::BracketExprContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -160,6 +152,10 @@ public:
   }
 
   virtual antlrcpp::Any visitFloatConst(Pcl1Parser::FloatConstContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitTypeID(Pcl1Parser::TypeIDContext *ctx) override {
     return visitChildren(ctx);
   }
 

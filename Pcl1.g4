@@ -21,8 +21,7 @@ compoundStmt         : BO stmtList DY ;
 
 stmt : compoundStmt
      | assignmentStmt
-     | loop_num_stmt
-     | loop_until_stmt
+     | loop_while_stmt
      | if_stmt
      | printStmt
      |
@@ -30,13 +29,13 @@ stmt : compoundStmt
 
 stmtList       : stmt ( ';' stmt )* ;
 assignmentStmt : variable '=' expr ;
-loop_num_stmt       : LOOP ',' expr '}' stmtList '{' ;
-loop_until_stmt     : LOOP '}' stmtList '{' WHILE '(' expr ')' ;
+loop_while_stmt     : LOOP '}' stmtList '{' WHILE '(' expr ')' ;
 if_stmt         : IF '(' expr ')' '}' (( stmtList ) '{' ( ELSE  '}' stmtList '{'  )?) ;
 printStmt		: PRINT '(' formatString printArg* ')';
 
 formatString   : STRING ;
 printArg       : ',' expr ;
+
 
 variable : IDENTIFIER ;
 
@@ -48,9 +47,8 @@ expr locals [ TypeSpec *type = nullptr ]
      | signedNumber			#signedNumberExpr
      | variable				#variableExpr
      | '(' expr ')'			#parenExpr
-     | '}' expr '{'			#bracketExpr
      ;
-     
+		
 mulDivOp : MUL_OP | DIV_OP ;
 addSubOp : ADD_OP | SUB_OP ;
 relOp     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
@@ -64,6 +62,11 @@ number locals [ TypeSpec *type = nullptr ]
     : INTEGER    # integerConst
     | FLOAT      # floatConst
     ;
+    
+typeID 	: IDENTIFIER
+	| INTEGER_TYPE
+	| FLOAT_TYPE
+	;
 
 fragment A : [Aa];
 fragment B : [Bb];
@@ -92,17 +95,21 @@ fragment X : [Xx];
 fragment Y : [Yy];
 fragment Z : [Zz];
 
-MAIN    : M A I N ;
+MAIN    : P E P E ;
 BO      : B O ;
 DY      : D Y ;
 VAR     : V A R ;
 DO      : D O ;
-WHILE   : W H I L E ;
-IF      : I F ;
+WHILE   : T I M E P E P E ;
+IF      : C H E C K P E P E ;
 ELSE    : E L S E ;
 UNTIL	: U N T I L ;
-PRINT	: P R I N T ;
-LOOP	: L O O P ;
+PRINT	: P E P E P R I N T ;
+LOOP	: P E P E L O O P ;
+END		: E N D ;
+INTEGER_TYPE : 'int';
+FLOAT_TYPE: 'float';
+RETURN : R E T U R N ;
 
 MUL_OP :   '*' ;
 DIV_OP :   '/' ;

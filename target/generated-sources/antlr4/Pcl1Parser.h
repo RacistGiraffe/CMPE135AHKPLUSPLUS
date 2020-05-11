@@ -18,20 +18,21 @@ public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
     T__7 = 8, T__8 = 9, MAIN = 10, BO = 11, DY = 12, VAR = 13, DO = 14, 
-    WHILE = 15, IF = 16, ELSE = 17, UNTIL = 18, PRINT = 19, LOOP = 20, MUL_OP = 21, 
-    DIV_OP = 22, ADD_OP = 23, SUB_OP = 24, EQ_OP = 25, NE_OP = 26, LT_OP = 27, 
-    LE_OP = 28, GT_OP = 29, GE_OP = 30, IDENTIFIER = 31, INTEGER = 32, FLOAT = 33, 
-    NEWLINE = 34, WS = 35, QUOTE = 36, STRING = 37
+    WHILE = 15, IF = 16, ELSE = 17, UNTIL = 18, PRINT = 19, LOOP = 20, END = 21, 
+    INTEGER_TYPE = 22, FLOAT_TYPE = 23, RETURN = 24, MUL_OP = 25, DIV_OP = 26, 
+    ADD_OP = 27, SUB_OP = 28, EQ_OP = 29, NE_OP = 30, LT_OP = 31, LE_OP = 32, 
+    GT_OP = 33, GE_OP = 34, IDENTIFIER = 35, INTEGER = 36, FLOAT = 37, NEWLINE = 38, 
+    WS = 39, QUOTE = 40, STRING = 41
   };
 
   enum {
     RuleProgram = 0, RuleHeader = 1, RuleMainBlock = 2, RuleBlock = 3, RuleDeclarations = 4, 
     RuleDeclList = 5, RuleDecl = 6, RuleVarList = 7, RuleVarId = 8, RuleTypeId = 9, 
     RuleCompoundStmt = 10, RuleStmt = 11, RuleStmtList = 12, RuleAssignmentStmt = 13, 
-    RuleLoop_num_stmt = 14, RuleLoop_until_stmt = 15, RuleIf_stmt = 16, 
-    RulePrintStmt = 17, RuleFormatString = 18, RulePrintArg = 19, RuleVariable = 20, 
-    RuleExpr = 21, RuleMulDivOp = 22, RuleAddSubOp = 23, RuleRelOp = 24, 
-    RuleSignedNumber = 25, RuleSign = 26, RuleNumber = 27
+    RuleLoop_while_stmt = 14, RuleIf_stmt = 15, RulePrintStmt = 16, RuleFormatString = 17, 
+    RulePrintArg = 18, RuleVariable = 19, RuleExpr = 20, RuleMulDivOp = 21, 
+    RuleAddSubOp = 22, RuleRelOp = 23, RuleSignedNumber = 24, RuleSign = 25, 
+    RuleNumber = 26, RuleTypeID = 27
   };
 
   Pcl1Parser(antlr4::TokenStream *input);
@@ -58,8 +59,7 @@ public:
   class StmtContext;
   class StmtListContext;
   class AssignmentStmtContext;
-  class Loop_num_stmtContext;
-  class Loop_until_stmtContext;
+  class Loop_while_stmtContext;
   class If_stmtContext;
   class PrintStmtContext;
   class FormatStringContext;
@@ -71,7 +71,8 @@ public:
   class RelOpContext;
   class SignedNumberContext;
   class SignContext;
-  class NumberContext; 
+  class NumberContext;
+  class TypeIDContext; 
 
   class  ProgramContext : public antlr4::ParserRuleContext {
   public:
@@ -231,8 +232,7 @@ public:
     virtual size_t getRuleIndex() const override;
     CompoundStmtContext *compoundStmt();
     AssignmentStmtContext *assignmentStmt();
-    Loop_num_stmtContext *loop_num_stmt();
-    Loop_until_stmtContext *loop_until_stmt();
+    Loop_while_stmtContext *loop_while_stmt();
     If_stmtContext *if_stmt();
     PrintStmtContext *printStmt();
 
@@ -271,24 +271,9 @@ public:
 
   AssignmentStmtContext* assignmentStmt();
 
-  class  Loop_num_stmtContext : public antlr4::ParserRuleContext {
+  class  Loop_while_stmtContext : public antlr4::ParserRuleContext {
   public:
-    Loop_num_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *LOOP();
-    ExprContext *expr();
-    StmtListContext *stmtList();
-
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  Loop_num_stmtContext* loop_num_stmt();
-
-  class  Loop_until_stmtContext : public antlr4::ParserRuleContext {
-  public:
-    Loop_until_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    Loop_while_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *LOOP();
     StmtListContext *stmtList();
@@ -300,7 +285,7 @@ public:
    
   };
 
-  Loop_until_stmtContext* loop_until_stmt();
+  Loop_while_stmtContext* loop_while_stmt();
 
   class  If_stmtContext : public antlr4::ParserRuleContext {
   public:
@@ -415,15 +400,6 @@ public:
     std::vector<ExprContext *> expr();
     ExprContext* expr(size_t i);
     RelOpContext *relOp();
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  BracketExprContext : public ExprContext {
-  public:
-    BracketExprContext(ExprContext *ctx);
-
-    ExprContext *expr();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
@@ -576,6 +552,21 @@ public:
   };
 
   NumberContext* number();
+
+  class  TypeIDContext : public antlr4::ParserRuleContext {
+  public:
+    TypeIDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *IDENTIFIER();
+    antlr4::tree::TerminalNode *INTEGER_TYPE();
+    antlr4::tree::TerminalNode *FLOAT_TYPE();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  TypeIDContext* typeID();
 
 
   virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;

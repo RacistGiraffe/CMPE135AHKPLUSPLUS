@@ -14,6 +14,7 @@ using namespace wci::intermediate::symtabimpl;
 using namespace wci::util;
 
 const bool DEBUG_1 = false;
+static string func_id = "";
 
 Pass1Visitor::Pass1Visitor()
 {
@@ -211,24 +212,15 @@ antlrcpp::Any Pass1Visitor::visitParenExpr(Pcl1Parser::ParenExprContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitBracketExpr(Pcl1Parser::BracketExprContext *ctx)
-{
-    if (DEBUG_1) cout << "=== Pass 1: visitBracketExpr: " + ctx->getText() << endl;
-
-    auto value = visitChildren(ctx);
-    ctx->type = ctx->expr()->type;
-    return value;
-}
-
 antlrcpp::Any Pass1Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 {
-	if (DEBUG_1) cout << "=== Pass1: visitRelOpExpr: " + ctx->getText() << endl;
+	if (DEBUG_1) cout << "=== Pass 1: visitRelOpExpr: " + ctx->getText() << endl;
 	auto value = visitChildren(ctx);
 
 	TypeSpec *type1 = ctx->expr(0)->type;
 	TypeSpec *type2 = ctx->expr(1)->type;
 
-	 bool integer_mode =    (type1 == Predefined::integer_type)
+	bool integer_mode =    (type1 == Predefined::integer_type)
 	                        && (type2 == Predefined::integer_type);
 	bool real_mode    =    (type1 == Predefined::real_type)
 						&& (type2 == Predefined::real_type);
@@ -241,6 +233,63 @@ antlrcpp::Any Pass1Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 	return value;
 }
 
-//antlrcpp::Any Pass1Visitor::visitLoop_num_stmt(Pcl1Parser::Loop_num_stmtContext *context)
-//antlrcpp::Any visitLoop_until_stmt(Pcl1Parser::Loop_until_stmtContext *context) override;
-//antlrcpp::Any visitIf_stmt(Pcl1Parser::If_stmtContext *context) override;
+/*antlrcpp::Any Pass1Visitor::visitFuncCallExpr(Pcl1Parser::FuncCallExprContext *ctx)
+{
+    if(DEBUG_1) cout << "=== Pass 1: visitFuncCallExpr: " + ctx->getText() << endl;
+    string func_name = ctx->function_call()->funcID()->getText();
+    SymTabEntry *function_id = symtab_stack->lookup(func_name);
+    ctx->type = function_id->get_typespec();
+    return visitChildren(ctx);
+}
+
+antlrcpp::Any Pass1Visitor::visitFuncID(Pcl1Parser::FuncIDContext *ctx)
+{
+	if(DEBUG_1) cout << "=== Pass 1:  visitFuncID: " + ctx->getText() << endl;
+	string func_name = ctx->IDENTIFIER()->toString();
+	SymTabEntry *function_id = symtab_stack->enter_local(func_name);
+	function_id->set_definition((Definition) DF_FUNCTION);
+	variable_id_list.push_back(function_id);
+	return visitChildren(ctx);
+}
+
+
+antlrcpp::Any Pass1Visitor::visitFunction_defn(Pcl1Parser::Function_defnContext *ctx)
+{
+    if (DEBUG_1) cout << "=== Pass 1: visitFunction_defn: " + ctx->getText() << endl;
+    func_id = ctx->funcID()->getText() + "_";
+
+    variable_id_list.resize(0);
+    auto value = visit(ctx->funcID());
+    visit(ctx->typeID());
+
+    TypeSpec *type;
+    string type_indicator;
+    string type_name = ctx->typeID()->getText();
+
+    if (type_name == "int")
+    {
+        type = Predefined::integer_type;
+        type_indicator = "I";
+    }
+    else if (type_name == "float")
+    {
+        type = Predefined::real_type;
+        type_indicator = "F";
+    }
+    else
+    {
+        type = nullptr;
+        type_indicator = "?";
+    }
+    for (SymTabEntry *id : variable_id_list)
+    {
+        id->set_typespec(type);
+    }
+    for (unsigned int i=0; i<ctx->declaration().size(); i++)
+    {
+    	visit(ctx->declaration(i));
+    }
+    visit(ctx->stmtList());
+    func_id = "";
+    return NULL;
+}*/
