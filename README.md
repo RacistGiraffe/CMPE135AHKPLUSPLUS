@@ -1,5 +1,5 @@
-# AHK++
-Compiler created for CMPE 152 at SJSU. This compiler is for a really random language based off of C++, Pascal, and AutoHotKey (hence the name AHK++). However, we currently lost what we used from AHK, so it's kinda just pascal++ now. We're keeping the name cause it sounds cool. 
+# Memertons
+Compiler created for CMPE 152 at SJSU. This compiler is for a really random language based off of C++ and Pascal. Wanted to add our own special touch, so we made it all about Pepe the Frog as well. 
 
 ## To run
 Import all files to your C/C++ Project in eclipse. Ensure ANTLR 4.7.2 is installed and is setup properly to be used with eclipse. Once that is done, change your include settings (Project | Properties | C/C++ Build | Settings | GCC C++ Compiler | Includes) to include ANTLR4, the files in the main folder of the project, the wci folder, and /target/generated-sources/antlr4. Finally, go to GCC C++ Linker (in the same window) and select libraries. Add a new library and enter 'antlr4-runtime'. 
@@ -22,11 +22,5 @@ NOTE: For the second command, ENSURE there is no tilde (~) in the path. If there
 This will generate a class file (sample1.j) where you can then run it using Jasmin. 
 ### Current progress:
 ```
--Assignment 7 completed. Can compile and run. Produces good output. 
-```
-
-#### Current problems:
-```
--Cannot divide/multiply reals by integers and vice versa. This is why I use 9.0, 3.0, and 2.0 on some parts. 
--Hanging brackets MUST end with a semicolon
+-Project done. Procedures/functions do not work (taking an L on that). Error recovery does not exist (also taking an L).
 ```
