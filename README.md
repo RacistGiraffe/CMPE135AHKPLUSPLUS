@@ -2,6 +2,10 @@
 Compiler created for CMPE 152 at SJSU. This compiler is for a really random language based off of C++ and Pascal. Wanted to add our own special touch, so we made it all about Pepe the Frog as well. 
 
 ## To run
+TL;DR: Follow the setup instructions here at Ron Mak's website: https://www.cs.sjsu.edu/~mak/tutorials/InstallANTLR4Cpp.pdf
+
+Follow the instructions the same way, but instead, use Memertons.g4 instead of Pcl1.g4.
+
 Import all files to your C/C++ Project in eclipse. Ensure ANTLR 4.7.2 is installed and is setup properly to be used with eclipse. Once that is done, change your include settings (Project | Properties | C/C++ Build | Settings | GCC C++ Compiler | Includes) to include ANTLR4, the files in the main folder of the project, the wci folder, and /target/generated-sources/antlr4. Finally, go to GCC C++ Linker (in the same window) and select libraries. Add a new library and enter 'antlr4-runtime'. 
 
 Afterwards, right click Pcl1.g4 | Run As | External Tools Configurations. Create a new ANTLR run configuration and in the 'Arugments' text, enter: 
