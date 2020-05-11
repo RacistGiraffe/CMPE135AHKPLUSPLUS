@@ -27,7 +27,7 @@ Pass1Visitor::Pass1Visitor()
 
 Pass1Visitor::~Pass1Visitor() {}
 
-antlrcpp::Any Pass1Visitor::visitProgram(Pcl1Parser::ProgramContext *ctx)
+antlrcpp::Any Pass1Visitor::visitProgram(MemertonsParser::ProgramContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -40,7 +40,7 @@ antlrcpp::Any Pass1Visitor::visitProgram(Pcl1Parser::ProgramContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitHeader(Pcl1Parser::HeaderContext *ctx)
+antlrcpp::Any Pass1Visitor::visitHeader(MemertonsParser::HeaderContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitHeader: " + ctx->getText() << endl;
 
@@ -55,7 +55,7 @@ antlrcpp::Any Pass1Visitor::visitHeader(Pcl1Parser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitVarList(Pcl1Parser::VarListContext *ctx)
+antlrcpp::Any Pass1Visitor::visitVarList(MemertonsParser::VarListContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitVarList: " + ctx->getText() << endl;
 
@@ -65,7 +65,7 @@ antlrcpp::Any Pass1Visitor::visitVarList(Pcl1Parser::VarListContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitVarId(Pcl1Parser::VarIdContext *ctx)
+antlrcpp::Any Pass1Visitor::visitVarId(MemertonsParser::VarIdContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitVarId: " + ctx->getText() << endl;
 
@@ -79,7 +79,7 @@ antlrcpp::Any Pass1Visitor::visitVarId(Pcl1Parser::VarIdContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitTypeId(Pcl1Parser::TypeIdContext *ctx)
+antlrcpp::Any Pass1Visitor::visitTypeId(MemertonsParser::TypeIdContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitTypeId: " + ctx->getText() << endl;
 
@@ -97,7 +97,7 @@ antlrcpp::Any Pass1Visitor::visitTypeId(Pcl1Parser::TypeIdContext *ctx)
     }
 
     // Set the type of the variable parse tree nodes.
-    for (Pcl1Parser::VarIdContext *var_ctx : variable_ctx_list)
+    for (MemertonsParser::VarIdContext *var_ctx : variable_ctx_list)
     {
         var_ctx->type = type;
     }
@@ -105,7 +105,7 @@ antlrcpp::Any Pass1Visitor::visitTypeId(Pcl1Parser::TypeIdContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitAddSubExpr(Pcl1Parser::AddSubExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitAddSubExpr(MemertonsParser::AddSubExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitAddSubExpr: " + ctx->getText() << endl;
 
@@ -122,12 +122,15 @@ antlrcpp::Any Pass1Visitor::visitAddSubExpr(Pcl1Parser::AddSubExprContext *ctx)
     TypeSpec *type = integer_mode ? Predefined::integer_type
                    : real_mode    ? Predefined::real_type
                    :                nullptr;
-    ctx->type = type;
+    if(type == Predefined::integer_type || type == Predefined::real_type)
+		ctx->type = type;
+	else
+		cout << "Error, type mismatch in add/sub" << endl;
 
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitMulDivExpr(MemertonsParser::MulDivExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitMulDivExpr: " + ctx->getText() << endl;
 
@@ -144,12 +147,15 @@ antlrcpp::Any Pass1Visitor::visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx)
     TypeSpec *type = integer_mode ? Predefined::integer_type
                    : real_mode    ? Predefined::real_type
                    :                nullptr;
-    ctx->type = type;
+    if(type == Predefined::integer_type || type == Predefined::real_type)
+		ctx->type = type;
+	else
+		cout << "Error, type mismatch in mul/div" << endl;
 
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitVariableExpr(Pcl1Parser::VariableExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitVariableExpr(MemertonsParser::VariableExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitVariableExpr: " + ctx->getText() << endl;
 
@@ -160,7 +166,7 @@ antlrcpp::Any Pass1Visitor::visitVariableExpr(Pcl1Parser::VariableExprContext *c
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitSignedNumberExpr(Pcl1Parser::SignedNumberExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitSignedNumberExpr(MemertonsParser::SignedNumberExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitSignedNumberExpr: " + ctx->getText() << endl;
 
@@ -169,7 +175,7 @@ antlrcpp::Any Pass1Visitor::visitSignedNumberExpr(Pcl1Parser::SignedNumberExprCo
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitSignedNumber(Pcl1Parser::SignedNumberContext *ctx)
+antlrcpp::Any Pass1Visitor::visitSignedNumber(MemertonsParser::SignedNumberContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitSignedNumber: " + ctx->getText() << endl;
 
@@ -178,7 +184,7 @@ antlrcpp::Any Pass1Visitor::visitSignedNumber(Pcl1Parser::SignedNumberContext *c
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitUnsignedNumberExpr(Pcl1Parser::UnsignedNumberExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitUnsignedNumberExpr(MemertonsParser::UnsignedNumberExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitUnsignedNumberExpr: " + ctx->getText() << endl;
 
@@ -187,7 +193,7 @@ antlrcpp::Any Pass1Visitor::visitUnsignedNumberExpr(Pcl1Parser::UnsignedNumberEx
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitIntegerConst(Pcl1Parser::IntegerConstContext *ctx)
+antlrcpp::Any Pass1Visitor::visitIntegerConst(MemertonsParser::IntegerConstContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitIntegerConst: " + ctx->getText() << endl;
 
@@ -195,7 +201,7 @@ antlrcpp::Any Pass1Visitor::visitIntegerConst(Pcl1Parser::IntegerConstContext *c
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
+antlrcpp::Any Pass1Visitor::visitFloatConst(MemertonsParser::FloatConstContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitFloatConst: " + ctx->getText() << endl;
 
@@ -203,7 +209,7 @@ antlrcpp::Any Pass1Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass1Visitor::visitParenExpr(Pcl1Parser::ParenExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitParenExpr(MemertonsParser::ParenExprContext *ctx)
 {
     if (DEBUG_1) cout << "=== Pass 1: visitParenExpr: " + ctx->getText() << endl;
 
@@ -212,7 +218,7 @@ antlrcpp::Any Pass1Visitor::visitParenExpr(Pcl1Parser::ParenExprContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass1Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
+antlrcpp::Any Pass1Visitor::visitRelOpExpr(MemertonsParser::RelOpExprContext *ctx)
 {
 	if (DEBUG_1) cout << "=== Pass 1: visitRelOpExpr: " + ctx->getText() << endl;
 	auto value = visitChildren(ctx);
@@ -228,68 +234,9 @@ antlrcpp::Any Pass1Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 	TypeSpec *type = integer_mode ? Predefined::integer_type
 				   : real_mode    ? Predefined::real_type
 				   :                nullptr;
-
-	ctx->type = type;
+	if(type == Predefined::integer_type || type == Predefined::real_type)
+		ctx->type = type;
+	else
+		cout << "Error, type mismatch in relations" << endl;
 	return value;
 }
-
-/*antlrcpp::Any Pass1Visitor::visitFuncCallExpr(Pcl1Parser::FuncCallExprContext *ctx)
-{
-    if(DEBUG_1) cout << "=== Pass 1: visitFuncCallExpr: " + ctx->getText() << endl;
-    string func_name = ctx->function_call()->funcID()->getText();
-    SymTabEntry *function_id = symtab_stack->lookup(func_name);
-    ctx->type = function_id->get_typespec();
-    return visitChildren(ctx);
-}
-
-antlrcpp::Any Pass1Visitor::visitFuncID(Pcl1Parser::FuncIDContext *ctx)
-{
-	if(DEBUG_1) cout << "=== Pass 1:  visitFuncID: " + ctx->getText() << endl;
-	string func_name = ctx->IDENTIFIER()->toString();
-	SymTabEntry *function_id = symtab_stack->enter_local(func_name);
-	function_id->set_definition((Definition) DF_FUNCTION);
-	variable_id_list.push_back(function_id);
-	return visitChildren(ctx);
-}
-
-
-antlrcpp::Any Pass1Visitor::visitFunction_defn(Pcl1Parser::Function_defnContext *ctx)
-{
-    if (DEBUG_1) cout << "=== Pass 1: visitFunction_defn: " + ctx->getText() << endl;
-    func_id = ctx->funcID()->getText() + "_";
-
-    variable_id_list.resize(0);
-    auto value = visit(ctx->funcID());
-    visit(ctx->typeID());
-
-    TypeSpec *type;
-    string type_indicator;
-    string type_name = ctx->typeID()->getText();
-
-    if (type_name == "int")
-    {
-        type = Predefined::integer_type;
-        type_indicator = "I";
-    }
-    else if (type_name == "float")
-    {
-        type = Predefined::real_type;
-        type_indicator = "F";
-    }
-    else
-    {
-        type = nullptr;
-        type_indicator = "?";
-    }
-    for (SymTabEntry *id : variable_id_list)
-    {
-        id->set_typespec(type);
-    }
-    for (unsigned int i=0; i<ctx->declaration().size(); i++)
-    {
-    	visit(ctx->declaration(i));
-    }
-    visit(ctx->stmtList());
-    func_id = "";
-    return NULL;
-}*/

@@ -1,0 +1,13 @@
+PEPE sample3;
+
+	a, b, c, d, e, f as integer;
+    
+BO
+	a = 2;
+	b = 4;
+	c = 8;
+	d = 16;
+	e = 32;
+	f = a+c/b+d*e-a;
+	PEPEPRINT('f = %d\n', f);
+DY.

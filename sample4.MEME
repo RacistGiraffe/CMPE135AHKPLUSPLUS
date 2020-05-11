@@ -1,0 +1,38 @@
+PEPE sample4;
+
+    i, j, k as integer;
+    
+BO
+	i = 0;
+	j = 1;
+	 
+	PEPEPRINT('Expecting to print true\n');
+    CHECKPEPE (i < j) 
+    }
+    	PEPEPRINT('TRUE\n');
+    {;
+    
+	PEPEPRINT('Expecting to print k = j = 1\n');
+    CHECKPEPE (i > j)
+    }
+    	k = i;
+    	PEPEPRINT('k = i = %d\n', k);
+    {
+    PEPEOTHER
+    }
+    	k = j;
+    	PEPEPRINT('k = j = %d\n', k);
+    {;
+    
+    PEPEPRINT('Expecting to print k = i = 0\n');
+    CHECKPEPE (i < j)
+    }
+    	k = i;
+    	PEPEPRINT('k = i = %d\n', k);
+    {
+    PEPEOTHER
+    }
+    	k = j;
+    	PEPEPRINT('k = j = %d\n', k);
+    {;
+DY.

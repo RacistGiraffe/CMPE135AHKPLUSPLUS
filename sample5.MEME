@@ -1,0 +1,17 @@
+PEPE sample5;
+
+    i, j, k as integer;
+    
+BO
+	i = 0;
+	j = -1;
+	
+	k = i + j;
+	PEPEPRINT('k = %d\n', k);
+	k = k * -1;
+	PEPEPRINT('k = %d\n', k);
+	k = k * 2;
+	k = k - 1;
+	k = k - -1;
+	PEPEPRINT('k = %d\n', k);
+DY.

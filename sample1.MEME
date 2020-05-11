@@ -1,0 +1,38 @@
+PEPE sample1;
+
+    i, j as integer;
+	alpha, beta5x as real;
+    
+BO
+    j = 32;
+    beta5x = 12.0;
+    i = j;
+    i = 0;
+    
+    PEPELOOP
+    }
+        i = 2 + 3*j;
+	{
+    TIMEPEPE (i < j + 2);
+   
+    CHECKPEPE (i <= j) 
+    }
+    	i = j;
+    {;
+    
+    PEPEPRINT('i = %d\n', i);
+    PEPEPRINT('Test\n');
+    
+    CHECKPEPE (j > i)
+    }
+    	i = 3*j;
+    {
+    PEPEOTHER 
+    }
+        alpha = 9.0;
+        beta5x = alpha/3.0 - alpha*2.0;
+	{;
+	
+	PEPEPRINT('i = %d\n', i);
+	PEPEPRINT('beta5x = %f\n', beta5x);
+DY.

@@ -26,7 +26,7 @@ Pass2Visitor::~Pass2Visitor() {}
 
 ostream& Pass2Visitor::get_assembly_file() { return j_file; }
 
-antlrcpp::Any Pass2Visitor::visitProgram(Pcl1Parser::ProgramContext *ctx)
+antlrcpp::Any Pass2Visitor::visitProgram(MemertonsParser::ProgramContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -36,7 +36,7 @@ antlrcpp::Any Pass2Visitor::visitProgram(Pcl1Parser::ProgramContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitHeader(Pcl1Parser::HeaderContext *ctx)
+antlrcpp::Any Pass2Visitor::visitHeader(MemertonsParser::HeaderContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitHeader: " + ctx->getText() << endl;
 
@@ -60,7 +60,7 @@ antlrcpp::Any Pass2Visitor::visitHeader(Pcl1Parser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitMainBlock(Pcl1Parser::MainBlockContext *ctx)
+antlrcpp::Any Pass2Visitor::visitMainBlock(MemertonsParser::MainBlockContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitMainBlock" << endl;
 
@@ -117,14 +117,14 @@ antlrcpp::Any Pass2Visitor::visitMainBlock(Pcl1Parser::MainBlockContext *ctx)
     return nullptr;
 }
 
-antlrcpp::Any Pass2Visitor::visitDeclarations(Pcl1Parser::DeclarationsContext *ctx)
+antlrcpp::Any Pass2Visitor::visitDeclarations(MemertonsParser::DeclarationsContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitDeclarations: " << ctx->getText() << endl;
 
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitDecl(Pcl1Parser::DeclContext *ctx)
+antlrcpp::Any Pass2Visitor::visitDecl(MemertonsParser::DeclContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitDecl: " + ctx->getText() << endl;
 
@@ -133,7 +133,7 @@ antlrcpp::Any Pass2Visitor::visitDecl(Pcl1Parser::DeclContext *ctx)
 }
 
 
-antlrcpp::Any Pass2Visitor::visitVarId(Pcl1Parser::VarIdContext *ctx)
+antlrcpp::Any Pass2Visitor::visitVarId(MemertonsParser::VarIdContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitVarId: " + ctx->getText() << endl;
 
@@ -150,7 +150,7 @@ antlrcpp::Any Pass2Visitor::visitVarId(Pcl1Parser::VarIdContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitStmt(Pcl1Parser::StmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitStmt(MemertonsParser::StmtContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitStmt" << endl;
 
@@ -159,7 +159,7 @@ antlrcpp::Any Pass2Visitor::visitStmt(Pcl1Parser::StmtContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitAssignmentStmt(Pcl1Parser::AssignmentStmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitAssignmentStmt(MemertonsParser::AssignmentStmtContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitAssignmentStmt" << endl;
 
@@ -178,7 +178,7 @@ antlrcpp::Any Pass2Visitor::visitAssignmentStmt(Pcl1Parser::AssignmentStmtContex
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitAddSubExpr(Pcl1Parser::AddSubExprContext *ctx)
+antlrcpp::Any Pass2Visitor::visitAddSubExpr(MemertonsParser::AddSubExprContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitAddSubExpr" << endl;
 
@@ -214,7 +214,7 @@ antlrcpp::Any Pass2Visitor::visitAddSubExpr(Pcl1Parser::AddSubExprContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx)
+antlrcpp::Any Pass2Visitor::visitMulDivExpr(MemertonsParser::MulDivExprContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitMulDivExpr" << endl;
 
@@ -250,7 +250,7 @@ antlrcpp::Any Pass2Visitor::visitMulDivExpr(Pcl1Parser::MulDivExprContext *ctx)
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitVariableExpr(Pcl1Parser::VariableExprContext *ctx)
+antlrcpp::Any Pass2Visitor::visitVariableExpr(MemertonsParser::VariableExprContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitVariableExpr" << endl;
 
@@ -268,7 +268,7 @@ antlrcpp::Any Pass2Visitor::visitVariableExpr(Pcl1Parser::VariableExprContext *c
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitSignedNumber(Pcl1Parser::SignedNumberContext *ctx)
+antlrcpp::Any Pass2Visitor::visitSignedNumber(MemertonsParser::SignedNumberContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitSignedNumber" << endl;
 
@@ -288,7 +288,7 @@ antlrcpp::Any Pass2Visitor::visitSignedNumber(Pcl1Parser::SignedNumberContext *c
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitIntegerConst(Pcl1Parser::IntegerConstContext *ctx)
+antlrcpp::Any Pass2Visitor::visitIntegerConst(MemertonsParser::IntegerConstContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitIntegerConst" << endl;
 
@@ -298,7 +298,7 @@ antlrcpp::Any Pass2Visitor::visitIntegerConst(Pcl1Parser::IntegerConstContext *c
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
+antlrcpp::Any Pass2Visitor::visitFloatConst(MemertonsParser::FloatConstContext *ctx)
 {
     if (DEBUG_2) cout << "=== Pass 2: visitFloatConst" << endl;
 
@@ -308,7 +308,7 @@ antlrcpp::Any Pass2Visitor::visitFloatConst(Pcl1Parser::FloatConstContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitLoop_while_stmt(MemertonsParser::Loop_while_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitLoop_until_stmt" << endl;
 
@@ -321,7 +321,7 @@ antlrcpp::Any Pass2Visitor::visitLoop_while_stmt(Pcl1Parser::Loop_while_stmtCont
 
 }
 
-antlrcpp::Any Pass2Visitor::visitIf_stmt(Pcl1Parser::If_stmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitIf_stmt(MemertonsParser::If_stmtContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitIf_stmt" << endl;
 
@@ -358,7 +358,7 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(Pcl1Parser::If_stmtContext *ctx)
 	return NULL;
 }
 
-antlrcpp::Any Pass2Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
+antlrcpp::Any Pass2Visitor::visitRelOpExpr(MemertonsParser::RelOpExprContext *ctx)
 {
 	if (DEBUG_2) cout << "=== Pass 2: visitRelOpExpr" << endl;
 	auto value = visitChildren(ctx);
@@ -390,7 +390,7 @@ antlrcpp::Any Pass2Visitor::visitRelOpExpr(Pcl1Parser::RelOpExprContext *ctx)
 	return NULL;
 }
 
-antlrcpp::Any Pass2Visitor::visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx)
+antlrcpp::Any Pass2Visitor::visitPrintStmt(MemertonsParser::PrintStmtContext *ctx)
 {
     // Get the format string without the surrounding the single quotes.
     string str = ctx->formatString()->getText();
@@ -446,77 +446,5 @@ antlrcpp::Any Pass2Visitor::visitPrintStmt(Pcl1Parser::PrintStmtContext *ctx)
 
     return nullptr;
 }
-
-/*antlrcpp::Any Pass2Visitor::visitFunction_defn(Pcl1Parser::Function_defnContext *ctx)
-{
-	 if(DEBUG_2) cout << "=== Pass 2: visitFunction_defn: " << endl;
-	 fxn_name = ctx->funcID()->getText() + "_";
-	 vector<vector<string>> fxn_inputs;
-
-	 j_file << "\tgoto " << fxn_name << "end" << endl;
-	 j_file << ctx->funcID()->getText() << ":" << endl;
-	 j_file << "\tastore_1" << endl;
-
-	 if(ctx->declaration(0) != NULL)
-	 {
-		 for(unsigned int i = 0; i < ctx->declaration().size(); i++)
-		 {
-			 string type_name     = ctx->declaration(i)->children[0]->getText();
-			 string var_name = ctx->declaration(i)->children[1]->getText();
-			 fxn_inputs.push_back({fxn_name + var_name, type_name});
-		 }
-	 }
-	 fxn_variables_vec.emplace(ctx->funcID()->IDENTIFIER()->getText(), fxn_inputs);
-
-	 auto value = visitChildren(ctx->stmtList());
-	 j_file << "\tret 1" << endl;
-	 j_file << fxn_name << "end:" << endl;
-	 fxn_name = "";
-	 return value;
-}
-
-antlrcpp::Any Pass2Visitor::visitFunction_call(Pcl1Parser::Function_callContext *ctx)
-{
-	if(DEBUG_2) cout << "=== Pass 2: visitFunction_call" << endl;
-	if(ctx->identifiers() != NULL)
-	{
-		int input_count = ctx->identifiers()->expr().size();
-		vector<vector<string>> fxn_inputs = fxn_variables_vec.find(ctx->funcID()->getText())->second;
-		int input_num = fxn_inputs.size();
-
-		int total = 0;
-		if (input_num > input_count)
-		{
-			total = input_count;
-		}
-		else
-		{
-			total = input_num;
-		}
-		for(int i = 0; i < total; i++)
-		{
-			string var_name  = fxn_inputs[i][0];
-			string type_name = fxn_inputs[i][1];
-
-			visit(ctx->identifiers()->expr(i));
-
-			string type_indicator =
-				  (type_name == "int")     ? "I"
-				: (type_name == "float")  ? "F"
-				:                            "?";
-			// Emit a field put instruction.
-			j_file << "\tputstatic\t" << program_name << "/" << fxn_name <<  var_name << " " << type_indicator << endl;
-		}
-	}
-	j_file << "\tjsr " << ctx->funcID()->getText() << endl;
-	return NULL;
-}
-
-antlrcpp::Any Pass2Visitor::visitReturn_stmt(Pcl1Parser::Return_stmtContext *ctx)
-{
-	if(DEBUG_2) cout << "=== Pass 2: visitReturn_stmt" << endl;
-	visit(ctx->expr());
-	return NULL;
-}*/
 
 

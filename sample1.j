@@ -14,19 +14,6 @@
 .field private static alpha F
 .field private static beta5x F
 
-; a,b,c,d,e,fasinteger
-
-.field private static a I
-.field private static b I
-.field private static c I
-.field private static d I
-.field private static e I
-.field private static f I
-
-; gasreal
-
-.field private static g F
-
 .method public <init>()V
 
 	aload_0
@@ -57,6 +44,16 @@
 
 	ldc	12.0
 	putstatic	sample1/beta5x F
+
+; i=j
+
+	getstatic	sample1/j I
+	putstatic	sample1/i I
+
+; i=0
+
+	ldc	0
+	putstatic	sample1/i I
 
 ; PEPELOOP}i=2+3*j;{TIMEPEPE(i<j+2)
 
@@ -120,7 +117,7 @@ Label_3:
 	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
 	pop
 
-; CHECKPEPE(j>i)}i=3*j;{ELSE}alpha=9.0;beta5x=alpha/3.0-alpha*2.0;{
+; CHECKPEPE(j>i)}i=3*j;{PEPEOTHER}alpha=9.0;beta5x=alpha/3.0-alpha*2.0;{
 
 Label_4:
 	getstatic	sample1/j I
@@ -185,60 +182,6 @@ Label_7:
 	ldc	0
 	getstatic	sample1/beta5x F
 	invokestatic	java/lang/Float.valueOf(F)Ljava/lang/Float;
-	aastore
-	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
-	pop
-
-; a=2
-
-	ldc	2
-	putstatic	sample1/a I
-
-; b=4
-
-	ldc	4
-	putstatic	sample1/b I
-
-; c=8
-
-	ldc	8
-	putstatic	sample1/c I
-
-; d=16
-
-	ldc	16
-	putstatic	sample1/d I
-
-; e=32
-
-	ldc	32
-	putstatic	sample1/e I
-
-; f=a+c/b+d*e-a
-
-	getstatic	sample1/a I
-	getstatic	sample1/c I
-	getstatic	sample1/b I
-	idiv
-	iadd
-	getstatic	sample1/d I
-	getstatic	sample1/e I
-	imul
-	iadd
-	getstatic	sample1/a I
-	isub
-	putstatic	sample1/f I
-
-; PEPEPRINT('f = %d\n',f)
-
-	getstatic	java/lang/System/out Ljava/io/PrintStream;
-	ldc	"f = %d\n"
-	ldc	1
-	anewarray	java/lang/Object
-	dup
-	ldc	0
-	getstatic	sample1/f I
-	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 	aastore
 	invokevirtual java/io/PrintStream.printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
 	pop

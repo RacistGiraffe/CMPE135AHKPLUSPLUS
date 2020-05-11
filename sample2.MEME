@@ -1,0 +1,15 @@
+PEPE sample2;
+
+    i, j as integer;
+    
+BO
+    i = 1;
+    j = 10;
+    
+    PEPELOOP
+    }
+        i = i + 1;
+        PEPEPRINT('i = %d\n', i);
+	{
+    TIMEPEPE (i != j);
+DY.

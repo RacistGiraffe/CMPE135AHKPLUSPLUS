@@ -2,8 +2,8 @@
 #include <fstream>
 
 #include "antlr4-runtime.h"
-#include "target/generated-sources/antlr4/Pcl1Lexer.h"
-#include "target/generated-sources/antlr4/Pcl1Parser.h"
+#include "target/generated-sources/antlr4/MemertonsLexer.h"
+#include "target/generated-sources/antlr4/MemertonsParser.h"
 #include "Pass1Visitor.h"
 #include "Pass2Visitor.h"
 
@@ -17,10 +17,10 @@ int main(int argc, const char *args[])
     ins.open(args[1]);
 
     ANTLRInputStream input(ins);
-    Pcl1Lexer lexer(&input);
+    MemertonsLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
 
-    Pcl1Parser parser(&tokens);
+    MemertonsParser parser(&tokens);
     tree::ParseTree *tree = parser.program();
 
     Pass1Visitor *pass1 = new Pass1Visitor();
